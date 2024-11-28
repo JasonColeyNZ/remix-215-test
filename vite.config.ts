@@ -24,4 +24,7 @@ export default defineConfig({
 		}),
 		tsconfigPaths(),
 	],
+	optimizeDeps: {
+		include: ["tailwind-merge"],
+	},
 });

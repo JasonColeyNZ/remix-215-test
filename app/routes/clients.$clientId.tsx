@@ -1,20 +1,44 @@
-import { Link, Outlet, useParams } from "@remix-run/react";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { NavLink, Outlet, redirect, useParams } from "@remix-run/react";
+import { cn } from "~/utils";
+
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+	const url = new URL(request.url);
+	const clientId = params.clientId;
+	const endPath = url.pathname.split("/").pop();
+	if (clientId === endPath) throw redirect("detail");
+	// console.log("clientId", clientId, endPath);
+
+	return {};
+};
 
 const ClientId = () => {
 	const { clientId } = useParams();
 	return (
-		<>
-			<div className="mt-4 text-lg font-medium">Client {clientId}</div>
-			<div className="flex gap-4 bg-green-200 rounded-md px-3">
+		<div className="border rounded p-2 flex gap-2 flex-col items-center">
+			<div className="text-lg font-medium">Client {clientId}</div>
+			<div className="flex gap-4 bg-green-200 rounded-md p-3">
 				<div>
-					<Link to="detail">Go to Detail</Link>
+					<NavLink
+						className={({ isActive }) =>
+							cn(isActive && "bg-green-500 text-white", "p-1 rounded")
+						}
+						to="detail">
+						Go to Detail
+					</NavLink>
 				</div>
 				<div>
-					<Link to="notes">Go to Notes</Link>
+					<NavLink
+						className={({ isActive }) =>
+							cn(isActive && "bg-green-500 text-white", "p-1 rounded")
+						}
+						to="notes">
+						Go to Notes
+					</NavLink>
 				</div>
 			</div>
 			<Outlet />
-		</>
+		</div>
 	);
 };
 
