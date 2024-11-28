@@ -31,7 +31,7 @@ const Clients = () => {
 			<div className="p-2 bg-gray-200 rounded-md">
 				<NavLink to="..">Back to Root</NavLink>
 			</div>
-			<div className="flex flex-col items-center gap-2 border rounded p-2 border-blue-300">
+			<div className="flex flex-col items-center gap-2 border rounded p-2 border-blue-400">
 				<div className="text-xl font-semibold">Clients</div>
 				<Suspense fallback={<div>Loading...</div>}>
 					<Await resolve={data}>{(data) => <div>{data.message}</div>}</Await>
