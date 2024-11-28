@@ -24,6 +24,11 @@ export const loader = async () => {
 	return { myData: data };
 };
 
+const clients = [
+	{ id: 1, name: "Client 1" },
+	{ id: 2, name: "Client 2" },
+];
+
 const Clients = () => {
 	const { myData } = useLoaderData<typeof loader>();
 	return (
@@ -37,24 +42,17 @@ const Clients = () => {
 					<Await resolve={myData}>{(data) => <div>{data.message}</div>}</Await>
 				</Suspense>
 				<nav className="flex bg-blue-200 gap-4 rounded-md p-2">
-					<div>
-						<NavLink
-							className={({ isActive }) =>
-								cn(isActive && "bg-blue-500 text-white", "p-1 rounded ")
-							}
-							to="1">
-							Client 1
-						</NavLink>
-					</div>
-					<div>
-						<NavLink
-							className={({ isActive }) =>
-								cn(isActive && "bg-blue-500 text-white", "p-1 rounded ")
-							}
-							to="2">
-							Client 2
-						</NavLink>
-					</div>
+					{clients.map((client) => (
+						<div key={client.id}>
+							<NavLink
+								className={({ isActive }) =>
+									cn(isActive && "bg-blue-500 text-white", "p-1 rounded ")
+								}
+								to={client.id.toString()}>
+								{client.name}
+							</NavLink>
+						</div>
+					))}
 				</nav>
 				<Outlet />
 			</div>
