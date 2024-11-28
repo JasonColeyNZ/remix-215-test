@@ -21,11 +21,11 @@ export const loader = async () => {
 		}, 3000);
 	});
 
-	return data;
+	return { myData: data };
 };
 
 const Clients = () => {
-	const data = useLoaderData<typeof loader>();
+	const { myData } = useLoaderData<typeof loader>();
 	return (
 		<div className="flex h-screen items-center justify-center flex-col gap-2">
 			<div className="p-2 bg-gray-200 rounded-md">
@@ -34,7 +34,7 @@ const Clients = () => {
 			<div className="flex flex-col items-center gap-2 border rounded p-2 border-blue-400">
 				<div className="text-xl font-semibold">Clients</div>
 				<Suspense fallback={<div>Loading...</div>}>
-					<Await resolve={data}>{(data) => <div>{data.message}</div>}</Await>
+					<Await resolve={myData}>{(data) => <div>{data.message}</div>}</Await>
 				</Suspense>
 				<nav className="flex bg-blue-200 gap-4 rounded-md p-2">
 					<div>

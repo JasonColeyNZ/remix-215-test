@@ -24,7 +24,7 @@ const ClientId = () => {
 							cn(isActive && "bg-green-500 text-white", "p-1 rounded")
 						}
 						to="detail">
-						Go to Detail
+						Details
 					</NavLink>
 				</div>
 				<div>
@@ -33,7 +33,7 @@ const ClientId = () => {
 							cn(isActive && "bg-green-500 text-white", "p-1 rounded")
 						}
 						to="notes">
-						Go to Notes
+						Notes
 					</NavLink>
 				</div>
 			</div>
